@@ -1,10 +1,5 @@
 @import url('http://fonts.cdnfonts.com/css/pf-arma-five');
 
-/******************************************
-/* HOT GARBAGE - PLEASE DON'T MIMIC THIS CSS
-/*******************************************/
-
-/* Box Model Hack */
 *{
   box-sizing: border-box;
 }
@@ -100,7 +95,6 @@ li{
 }
 
 
-
 /* custom checkbox */
 #light-dark {
   margin-right: 10px;
@@ -126,8 +120,3 @@ li{
   content: "✔";
   font-size: 0.8rem;
 }
-
-
-/******************************************
-/* ADDITIONAL STYLES
-/*******************************************/
