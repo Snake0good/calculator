@@ -1,14 +1,8 @@
-// const one = document.querySelector('#one').addEventListener('click', getNumber)
-// const two = document.querySelector('#two').addEventListener('click', getNumber)
-
-
 let total = 0;
 
 const numbers = document.querySelectorAll('.numbers');
 const signs = document.querySelectorAll('.sign');
-
 const result = document.querySelector("#result");
-
 const showPlus = document.querySelector('#show-plus')
 
 let arr = [];
@@ -16,9 +10,14 @@ let arr2 = [];
 let arr3 = [];
 
 let visibleArray = [];
-
 let mathSymbol;
+let answer = 0; // store answer to cut off too many numbers
 
+
+// ==== check son the page -==== //
+const demo = document.querySelector("#demo");
+const demoOne = document.querySelector("#demo2");
+const demoTwo = document.querySelector("#demo3");
 
 const addNumbers = () => {
     arr.pop();
@@ -71,36 +70,67 @@ for (let i=0; i<numbers.length; i++) {
 
         // push the number into arr2 and hold it
         if (button === "+") {
-            addNumbers();
+            if (answer === 0) {
+                addNumbers();
+            } else {
+                arr2 = answer;
+                arr = [];
+                mathSymbol = "+";
+            }
         } else if (button === "-") { // this is the minus symbol            
-            subtractNumbers();
+            if (answer === 0) {
+                subtractNumbers();
+            } else {
+                arr2 = answer;
+                arr = [];
+                mathSymbol = "-";
+            }
         } else if (button === "×") { // this is the multiplication symbol    
-            multiplyNumbers();
+            if (answer === 0) {
+                multiplyNumbers();
+            } else {
+                arr2 = answer;
+                arr = [];
+                mathSymbol = "x";
+            }
         } else if (button === "÷") { // this is the division symbol    
-            divideNumbers();
+            if (answer === 0) {
+                divideNumbers();
+            } else {
+                arr2 = answer;
+                arr = [];
+                mathSymbol = "/";
+            }
         } 
-
-
-
 
         // check the math symbol to see which function to perform
         if (button === "=") {
-            let answer = 0; // store answer to cut off too many numbers
             arr.pop();
             result.innerHTML = Number(arr.join(" "));
-            arr3.push(Number(arr.join("")))
+            arr3.push(Number(arr.join("")));
+
+            if (arr3 === "") {
+                arr3 = Number(newNumber);
+            }
 
             // show the second number to be added
             if (mathSymbol === "+") {
+                answer = (Number(arr2) + Number(arr3));
                 result.innerHTML = (Number(arr2) + Number(arr3));  
-                mathSymbol = "";              
+                mathSymbol = "";
+                // store the answer
             } else if (mathSymbol === "-") {
-                result.innerHTML = (Number(arr2) - Number(arr3))
-                mathSymbol = "";              
+                result.innerHTML = (Number(arr2) - Number(arr3));
+                mathSymbol = "";     
+                // store the answer
+                answer = (Number(arr2) - Number(arr3));
             } else if (mathSymbol === "x") {
-                result.innerHTML = (Number(arr2) * Number(arr3))
-                mathSymbol = "";              
+                // store the answer
+                answer = (Number(arr2) * Number(arr3)); 
+                result.innerHTML = answer;
+                mathSymbol = "";    
             } else if (mathSymbol === "/") {
+                // store the answer
                 answer = (Number(arr2) / Number(arr3)); 
                 if (answer.toString().length > 9) {
                     result.innerHTML = answer.toFixed(9);
@@ -111,21 +141,24 @@ for (let i=0; i<numbers.length; i++) {
                 mathSymbol = "";              
             }
 
-
-
             // claer all of the arrays --> maybe keep one to go again?
-            arr.splice(0);
-            arr2.splice(0);
-            arr3.splice(0);
-            visibleArray.splice(0);
+            arr = [];
+            arr2 = [];
+            arr3 = [];
+            visibleArray = [];
         }
     })
-    
-
 }
 
+// clear the calculator
+const clearAll = () => {
+    result.innerHTML = "- -";
+    mathSymbol = "";
+    answer = 0;
+}
 
-
+const clear = document.querySelector("#clear");
+clear.addEventListener("click", clearAll)
 
 
 // dark mode for less birghtness
