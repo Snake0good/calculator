@@ -1,4 +1,4 @@
-# Calculator
+# Calculator 🧮
 Here is my repo for the JavaScript basic calculator. 
 
 The initial calculator worked, but I wasn't pleased with how I built it. I started using arrays because I felt very comfortable with them (coming from Python and the numpy library). So, I re-did it and made the beefy calc. Much happier. 
